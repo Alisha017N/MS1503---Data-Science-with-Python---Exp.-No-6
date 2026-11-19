@@ -37,17 +37,85 @@ To load product review text, perform sentiment polarity analysis using the `Text
 
 #Sentiment Analysis on Product Reviews using TextBlob
 
+import matplotlib.pyplot as plt
+
+from textblob import TextBlob
+
 #Step 1: Create a list of sample product reviews
+
+reviews = [
+    "The product is amazing and works perfectly!",
+    "Very disappointed with the battery life.",
+    "Quality is okay but could be improved.",
+    "Absolutely fantastic! Exceeded my expectations.",
+    "Not worth the price at all.",
+    "Packaging was good and delivery was on time.",
+    "The screen resolution is poor and camera is bad.",
+    "Loved the design and the features offered.",
+    "Average product, nothing special.",
+    "Excellent performance and great value for money!",
+]
 
 #Step 2: Initialize counters
 
+positive = 0
+
+negative = 0
+
+neutral = 0
+
 #Step 3: Analyze sentiment for each review
+
+print("---- Sentiment Analysis Results ----")
+
+for review in reviews:
+    analysis = TextBlob(review)
+    polarity = analysis.sentiment.polarity
+    if polarity > 0.1:
+        sentiment = "Positive"
+        positive += 1
+    elif polarity < -0.1:
+        sentiment = "Negative"
+        negative += 1
+    else:
+        sentiment = "Neutral"
+        neutral += 1
+    print(f"Review: {review}")
+    print(f"Polarity: {round(polarity, 2)} | Sentiment: {sentiment}\n")
 
 #Step 4: Display summary
 
+print("---- Summary ----")
+
+print("Positive Reviews:", positive)
+
+print("Negative Reviews:", negative)
+
+print("Neutral Reviews:", neutral)
+
 #Step 5: Plot sentiment distribution
 
+labels = ["Positive", "Negative", "Neutral"]
+values = [positive, negative, neutral]
+
+plt.figure(figsize=(6, 4))
+
+plt.bar(labels, values, color=["green", "red", "blue"])
+
+plt.title("Sentiment Distribution of Product Reviews")
+
+plt.xlabel("Sentiment Type")
+
+plt.ylabel("Number of Reviews")
+
+plt.show()
+
 ## Output
+
+<img width="619" height="761" alt="image" src="https://github.com/user-attachments/assets/b9691d8f-1a4d-466f-acd8-c174d9b26665" />
+
+
+<img width="641" height="463" alt="image" src="https://github.com/user-attachments/assets/c719e3bc-7554-48d8-9c4a-27a56180f100" />
 
 
 ## Result
